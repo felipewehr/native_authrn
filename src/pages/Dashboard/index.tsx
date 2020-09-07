@@ -1,17 +1,18 @@
-import React, { useContext } from 'react';
-import { View, Button } from 'react-native';
+import React from 'react';
+import { View, Button, Text } from 'react-native';
 import { signIn } from '../../services/auth'
-import AuthContext from '../../contexts/auth';
+import {useAuth} from '../../contexts/auth';
 
 const Dashboard: React.FC = () => {
-  const {signOut} = useContext(AuthContext);
+  const {signOut, user} = useAuth();
 
   function handleSignOut() {
     signOut();
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>{user?.name}</Text>
       <Button title="Logout" onPress={handleSignOut} />
     </View>
   )
